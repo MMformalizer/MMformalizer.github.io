@@ -155,3 +155,49 @@ body {
 #interpolation-image-wrapper img {
   border-radius: 5px;
 }
+.table-wrapper {
+overflow-x: auto;
+position: relative;
+padding: 20px 0;
+}
+.detailed-table {
+width: 100%;
+border-collapse: collapse;
+font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+font-size: 0.75rem; /* 稍微缩小字体以适应 24 列 */
+line-height: 1.2;
+border: 2px solid #333; /* 外边框 */
+}
+.detailed-table th, .detailed-table td {
+border: 1px solid #ccc;
+padding: 6px 2px;
+text-align: center;
+white-space: nowrap; /* 核心修复：禁止文字内换行 */
+min-width: 45px;      /* 确保 Img/Text 有足够宽度 */
+}
+/* 数据集之间的深色分割线线 */
+.border-right-bold {
+border-right: 2.5px solid #444 !important;
+}
+/* 表头背景与加粗 */
+.detailed-table thead th {
+background-color: #f8f9fa;
+font-weight: 700;
+color: #333;
+}
+.sub-header th {
+font-size: 0.7rem;
+color: #666;
+background-color: #fafafa !important;
+}
+/* 固定左侧两列（Model 和 Metric） */
+.sticky-col-1 { position: sticky; left: 0; background: white !important; z-index: 5; border-right: 1px solid #ccc !important; }
+.sticky-col-2 { position: sticky; left: 80px; background: white !important; z-index: 5; border-right: 2px solid #444 !important; }
+
+.section-divider {
+background-color: #E5E5FC !important;
+font-weight: bold;
+text-align: left !important;
+padding-left: 10px !important;
+font-style: italic;
+}
