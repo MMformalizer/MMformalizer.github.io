@@ -8,13 +8,29 @@ var table;
 // 2. 蓝色热力图格式化函数
 var colorFormatter = function (cell) {
     var val = cell.getValue();
-    if (typeof val !== "number") return val || "--";
-    // 颜色深度：分值越高蓝色越深
-    var alpha = Math.min(val / 100, 0.8);
+
+    // 处理空值或无效值
+    if (val === null || val === undefined || val === "" || val === "--") {
+        return "--";
+    }
+
+    // 强制转换为浮点数
+    var num = Number(parseFloat(val));
+
+    if (isNaN(num)) {
+        return val; // 如果不是数字则原样返回
+    }
+
+    // --- 核心修改：强制保留一位小数 ---
+    var displayValue = num.toFixed(1);
+
+    // 设置热力图背景颜色
+    var alpha = Math.min(num / 100, 0.8);
     cell.getElement().style.backgroundColor = "rgba(70, 130, 240, " + alpha + ")";
-    cell.getElement().style.color = val > 50 ? "#fff" : "#000"; // 高分切白字
+    cell.getElement().style.color = num > 50 ? "#fff" : "#000";
     cell.getElement().style.fontWeight = "500";
-    return val;
+
+    return displayValue;
 };
 
 // 3. 全局切换函数 (供 HTML 中的 onclick 调用)
