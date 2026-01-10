@@ -1,35 +1,31 @@
 <!DOCTYPE html>
 <html>
-<head>
 
+<head>
   <style>
-    /* 极致简约：去除模型行的灰色 */
-    .tabulator-group {
-        background: #ffffff !important;
-        border-top: 2px solid #000 !important;
-        border-bottom: 1px solid #eee !important;
-        height: 48px !important;
-        display: flex !important;
-        align-items: center !important;
-    }
-    .tabulator-group-handle { display: none !important; }
-    .model-header-text {
-        font-weight: 800 !important;
-        color: #000 !important;
-        padding-left: 10px;
-        font-size: 1.1rem;
-    }
-    /* 修正表头和单元格 */
-    .tabulator-col { background-color: #fcfcfc !important; }
-    .tabulator-cell { border-right: 1px solid #f0f0f0 !important; text-align: center; }
-    .tabs { margin-bottom: 20px !important; }
-  </style>
-  <link href="https://unpkg.com/tabulator-tables@5.5.0/dist/css/tabulator_bulma.min.css" rel="stylesheet">
-  <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.5.0/dist/js/tabulator.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/peity/3.3.0/jquery.peity.min.js"></script>
+/* 必须保留这段，否则表格模型标题会变灰或消失 */
+.tabulator-group {
+    background: #ffffff !important;
+    border-top: 2px solid #000000 !important;
+    border-bottom: 1px solid #eeeeee !important;
+    min-height: 45px !important;
+    display: flex;
+    align-items: center;
+}
+.model-header-text {
+    color: #000;
+    font-weight: 800;
+    font-size: 1.15rem;
+    padding-left: 15px;
+}
+/* 确保表格本身有高度 */
+#benchmark-table {
+    margin-top: 20px;
+}
+</style>
   <meta charset="utf-8">
   <meta name="description"
-        content="Deformable Neural Radiance Fields creates free-viewpoint portraits (nerfies) from casually captured videos.">
+    content="Deformable Neural Radiance Fields creates free-viewpoint portraits (nerfies) from casually captured videos.">
   <meta name="keywords" content="Nerfies, D-NeRF, NeRF">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MMFormalizer: Multimodal Autoformalization in the Wild</title>
@@ -48,15 +44,13 @@
     gtag('config', 'G-PYVRSFMDRL');
   </script>
 
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-        rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
 
   <link rel="stylesheet" href="./static/css/bulma.min.css">
   <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
   <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
   <link rel="icon" href="./static/images/favicon.ico">
 
@@ -66,299 +60,314 @@
   <script src="./static/js/bulma-slider.min.js"></script>
   <script src="./static/js/index.js"></script>
 </head>
+
 <body>
 
+  <!-- More Research Navigation -->
+  <nav class="navbar" role="navigation" aria-label="main navigation"
+    style="justify-content: center; background-color: #ffffff;">
+    <div class="navbar-item has-dropdown is-hoverable">
+      <a class="navbar-link" style="background-color: #ffffff;">
+        More Research
+      </a>
+      <div class="navbar-dropdown" style="background-color: #ffffff;">
+        <a class="navbar-item" href="https://phyx-bench.github.io/" target="_blank">
+          PhyX
+        </a>
+      </div>
+    </div>
+  </nav>
 
-
-<section class="hero">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">
-            <img src="./static/images/logo.png" style="width: 0.8em; vertical-align: middle; margin-right: 10px;">
-            MMFormalizer: Multimodal Autoformalization
-  <span style="font-style: italic;">in the Wild</span></h1>
-          <div class="is-size-5 publication-authors">
-            <span class="author-block">
-              <a href="https://scholar.google.com/citations?user=dFX1hXkAAAAJ&hl=en">Jing Xiong</a><sup>1</sup>,</span>
-            <span class="author-block">
-              <a href="">Qi Han</a><sup>1</sup>,</span>
-            <span class="author-block">
-              <a href="">Yunta Hsieh</a><sup>2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://killthefullmoon.github.io/index.html">Hui Shen</a><sup>2</sup>,
-            </span>
-            <span class="author-block">
-              <a href="">Huajian Xin</a><sup>3</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://chaofantao.top/">Chaofan Tao</a><sup>1</sup>,
-            </span>
-            <span class="author-block">
-              <a href="">Chenyang Zhao</a><sup>6</sup>
-            </span>
-            <span class="author-block">
-              <a href="">Hengyuan Zhang</a><sup>1</sup>
-            </span>
-            <span class="author-block">
-              <a href="https://wutaiqiang.github.io/">Taiqiang Wu</a><sup>1</sup>
-            </span>
-            <span class="author-block">
-              <a href="">Zhen Zhang</a><sup>4</sup>
-            </span>
-            <span class="author-block">
-              <a href="">Haochen Wang</a><sup>1</sup>
-            </span>
-            <span class="author-block">
-              <a href="">Zhongwei Wan</a><sup>5</sup>
-            </span>
-            <span class="author-block">
-              <a href="https://ikekonglp.github.io/">Lingpeng Kong</a><sup>1</sup>
-            </span>
-            <span class="author-block">
-              <a href="https://www.eee.hku.hk/~nwong/">Ngai Wong</a><sup>1</sup>
-            </span>
-
-          </div>
-
-          <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>The University of Hong Kong,</span>
-            <span class="author-block"><sup>2</sup>University of Michigan, Ann Arbor,</span>
-            <span class="author-block"><sup>3</sup>University of Edinburgh,</span>
-            <span class="author-block"><sup>4</sup>University of California, Santa Barbara,</span>
-            <span class="author-block"><sup>5</sup>Ohio State University,</span>
-            <span class="author-block"><sup>6</sup>University of California, Los Angeles,</span>
-          </div>
-
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
           <div class="column has-text-centered">
-            <div class="publication-links">
-              <!-- PDF Link. -->
-              <span class="link-block">
-                <a href="https://arxiv.org/html/2601.03017v1"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
+            <h1 class="title is-1 publication-title">
+              <img src="./static/images/logo.png" style="width: 0.8em; vertical-align: middle; margin-right: 10px;">
+              MMFormalizer: Multimodal Autoformalization
+              <span style="font-style: italic;">in the Wild</span>
+            </h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://scholar.google.com/citations?user=dFX1hXkAAAAJ&hl=en">Jing
+                  Xiong</a><sup>1*</sup>,</span>
+              <span class="author-block">
+                <a href="">Qi Han</a><sup>1*</sup>,</span>
+              <span class="author-block">
+                <a href="">Yunta Hsieh</a><sup>2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://killthefullmoon.github.io/index.html">Hui Shen</a><sup>2</sup>,
+              </span>
+              <span class="author-block">
+                <a href="">Huajian Xin</a><sup>3</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://chaofantao.top/">Chaofan Tao</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="">Chenyang Zhao</a><sup>6</sup>
+              </span>
+              <span class="author-block">
+                <a href="">Hengyuan Zhang</a><sup>1</sup>
+              </span>
+              <span class="author-block">
+                <a href="https://wutaiqiang.github.io/">Taiqiang Wu</a><sup>1</sup>
+              </span>
+              <span class="author-block">
+                <a href="">Zhen Zhang</a><sup>4</sup>
+              </span>
+              <span class="author-block">
+                <a href="">Haochen Wang</a><sup>1</sup>
+              </span>
+              <span class="author-block">
+                <a href="">Zhongwei Wan</a><sup>5</sup>
+              </span>
+              <span class="author-block">
+                <a href="https://ikekonglp.github.io/">Lingpeng Kong</a><sup>1</sup>
+              </span>
+              <span class="author-block">
+                <a href="https://www.eee.hku.hk/~nwong/">Ngai Wong</a><sup>1</sup>
+              </span>
+
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>The University of Hong Kong,</span>
+              <span class="author-block"><sup>2</sup>University of Michigan, Ann Arbor,</span>
+              <span class="author-block"><sup>3</sup>University of Edinburgh,</span>
+              <span class="author-block"><sup>4</sup>University of California, Santa Barbara,</span>
+              <span class="author-block"><sup>5</sup>Ohio State University,</span>
+              <span class="author-block"><sup>6</sup>University of California, Los Angeles,</span>
+            </div>
+
+            <div class="is-size-6 publication-authors">
+              <span class="author-block"><sup>*</sup>Co-first author.</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/html/2601.03017v1"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
                       <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
-                </a>
-              </span>
-              <!-- Code Link. -->
-              <span class="link-block">
-                <a href=""
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-github"></i>
-                  </span>
-                  <span>Code</span>
+                    </span>
+                    <span>arXiv</span>
                   </a>
-              </span>
-              <!-- Dataset Link. -->
-              <span class="link-block">
+                </span>
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+                <!-- Dataset Link. -->
+                <span class="link-block">
                   <a href="https://huggingface.co/datasets/menik1126/PhyX-AF" target="_blank"
-                     class="external-link button is-normal is-rounded is-dark">
+                    class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <img src="./static/images/huggingface-icon.png" alt="HF" style="width: 18px; height: 18px;">
                     </span>
                     <span>Data</span>
                   </a>
                 </span>
-            </div>
+              </div>
 
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
-<section class="hero is-light is-small">
-  <div class="hero-body">
-    <div class="container">
-      <h2 class="title is-3 has-text-centered">Case</h2>
-      <div id="results-carousel" class="columns is-centered">
-
-        <div class="column is-one-third">
-          <div class="card">
-            <div class="card-image">
-              <img src="./static/images/case_newton1-1.png" alt="Mechanics Case">
-            </div>
-            <div class="card-content">
-              <p class="is-size-7"><b>Case 1: Mechanics.</b> Automatic formalization of a Lagrangian system from a free-body diagram.</p>
             </div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <div class="column is-one-third">
-          <div class="card">
-            <div class="card-image">
-              <img src="./static/images/case_newton2-1.png" alt="EM Case">
-            </div>
-            <div class="card-content">
-              <p class="is-size-7"><b>Case 2: Electromagnetism.</b> Grounding Maxwell's equations in a complex boundary value problem.</p>
+
+  <section class="hero is-light is-small">
+    <div class="hero-body">
+      <div class="container">
+        <h2 class="title is-3 has-text-centered">Case</h2>
+        <div id="results-carousel" class="columns is-centered">
+
+          <div class="column is-one-third">
+            <div class="card">
+              <div class="card-image">
+                <img src="./static/images/case_newton1-1.png" alt="Mechanics Case">
+              </div>
+              <div class="card-content">
+                <p class="is-size-7"><b>Case 1: Mechanics.</b> Automatic formalization of a Lagrangian system from a
+                  free-body diagram.</p>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div class="column is-one-third">
-          <div class="card">
-            <div class="card-image">
-              <img src="./static/images/case_newton3-1.png" alt="Optics Case">
-            </div>
-            <div class="card-content">
-              <p class="is-size-7"><b>Case 3: Optics.</b> Translating optical path diagrams into formal geometric constraints.</p>
+          <div class="column is-one-third">
+            <div class="card">
+              <div class="card-image">
+                <img src="./static/images/case_newton2-1.png" alt="EM Case">
+              </div>
+              <div class="card-content">
+                <p class="is-size-7"><b>Case 2: Electromagnetism.</b> Grounding Maxwell's equations in a complex
+                  boundary value problem.</p>
+              </div>
             </div>
           </div>
-        </div>
 
-      </div>
-    </div>
-  </div>
-</section>
+          <div class="column is-one-third">
+            <div class="card">
+              <div class="card-image">
+                <img src="./static/images/case_newton3-1.png" alt="Optics Case">
+              </div>
+              <div class="card-content">
+                <p class="is-size-7"><b>Case 3: Optics.</b> Translating optical path diagrams into formal geometric
+                  constraints.</p>
+              </div>
+            </div>
+          </div>
 
-<section class="section">
-  <div class="container is-max-widescreen">
-    <h2 class="title is-3 has-text-centered">The MMFormalizer Pipeline</h2>
-    <div class="has-text-centered">
-      <img src="./static/images/pipeline-1.png" style="width: 100%; max-width: 1100px; margin-bottom: 20px;">
-      <p class="content has-text-justified" style="max-width: 1000px; margin: 0 auto;">
-        <b>MMFormalizer</b> follows a recursive decomposition-and-grounding strategy.
-        It systematically breaks down complex multimodal physics problems into formalizable components
-        and resolves logical dependencies through a tree-based search.
-      </p>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <!-- Abstract. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          Autoformalization faces fundamental challenges "in the wild" due to the multimodal nature of the physical world.
-  We propose <strong>MMFORMALIZER</strong>, which extends autoformalization beyond text by integrating adaptive grounding with entities from real-world mathematical and physical domains.
-  Our framework recursively constructs formal propositions in <strong>LEAN</strong> from perceptually grounded primitives.
-  To evaluate this, we introduce <strong>PHYX-AF</strong>, a new benchmark covering classical mechanics, relativity, quantum mechanics, and thermodynamics.
-  Results show that frontier models like GPT-5 and Gemini-3-Pro achieve the highest accuracy, while geometry remains the most challenging domain.
         </div>
       </div>
     </div>
+  </section>
 
-    <section class="section">
-  <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Recursive Grounding Dynamics</h2>
-        <div class="publication-video">
-          <img src="./static/images/decompose.gif" alt="MMFormalizer Process">
-        </div>
-        <div class="content has-text-justified">
-          <p>
-            ······
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container is-max-desktop">
-    <h2 class="title is-3 has-text-centered">Benchmark Analysis</h2>
-    <div class="columns is-vcentered">
-      <div class="column is-6">
-        <img src="./static/images/domain-1.png" style="width: 100%; border-radius: 8px;">
-      </div>
-      <div class="column is-6">
-        <h3 class="title is-4">PhyX-AF Statistics</h3>
-        <p class="content">
-          Our benchmark covers <b>4 major physical domains</b> and <b>12 sub-categories</b>.
-          The dataset is curated to ensure high-quality multimodal alignment between visual diagrams and formal Lean code.
+  <section class="section">
+    <div class="container is-max-widescreen">
+      <h2 class="title is-3 has-text-centered">The MMFormalizer Pipeline</h2>
+      <div class="has-text-centered">
+        <img src="./static/images/pipeline-1.png" style="width: 100%; max-width: 1100px; margin-bottom: 20px;">
+        <p class="content has-text-justified" style="max-width: 1000px; margin: 0 auto;">
+          <b>MMFormalizer</b> follows a recursive decomposition-and-grounding strategy.
+          It systematically breaks down complex multimodal physics problems into formalizable components
+          and resolves logical dependencies through a tree-based search.
         </p>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section class="section">
-  <div class="container is-max-widescreen">
-    <h2 class="title is-3 has-text-centered">Experimental Evaluation</h2>
-
-    <div class="content">
-      <h3 class="title is-4">Multi-Dimensional Performance</h3>
-      <div class="has-text-centered mb-6"> <img src="./static/images/radar-1.png"
-             alt="Performance Radar Chart"
-             style="width: 100%; max-width: 950px; height: auto;">
-
-        <p class="is-size-5 mt-4 has-text-grey" style="max-width: 800px; margin-left: auto; margin-right: auto;">
-        </p>
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            Autoformalization faces fundamental challenges "in the wild" due to the multimodal nature of the physical
+            world.
+            We propose <strong>MMFORMALIZER</strong>, which extends autoformalization beyond text by integrating
+            adaptive grounding with entities from real-world mathematical and physical domains.
+            Our framework recursively constructs formal propositions in <strong>LEAN</strong> from perceptually grounded
+            primitives.
+            To evaluate this, we introduce <strong>PHYX-AF</strong>, a new benchmark covering classical mechanics,
+            relativity, quantum mechanics, and thermodynamics.
+            Results show that frontier models like GPT-5 and Gemini-3-Pro achieve the highest accuracy, while geometry
+            remains the most challenging domain.
+          </div>
+        </div>
       </div>
-    </div>
+
+      <section class="section">
+        <div class="container is-max-desktop">
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+              <h2 class="title is-3">Recursive Grounding Dynamics</h2>
+              <div class="publication-video">
+                <img src="./static/images/decompose.gif" alt="MMFormalizer Process">
+              </div>
+              <div class="content has-text-justified">
+                <p>
+                  ······
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container is-max-desktop">
+          <h2 class="title is-3 has-text-centered">Benchmark Analysis</h2>
+          <div class="columns is-vcentered">
+            <div class="column is-6">
+              <img src="./static/images/domain-1.png" style="width: 100%; border-radius: 8px;">
+            </div>
+            <div class="column is-6">
+              <h3 class="title is-4">PhyX-AF Statistics</h3>
+              <p class="content">
+                Our benchmark covers <b>4 major physical domains</b> and <b>12 sub-categories</b>.
+                The dataset is curated to ensure high-quality multimodal alignment between visual diagrams and formal
+                Lean code.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container is-max-widescreen">
+          <h2 class="title is-3 has-text-centered">Experimental Evaluation</h2>
+
+          <div class="content">
+            <h3 class="title is-4">Multi-Dimensional Performance</h3>
+            <div class="has-text-centered mb-6"> <img src="./static/images/radar-1.png" alt="Performance Radar Chart"
+                style="width: 100%; max-width: 950px; height: auto;">
+
+              <p class="is-size-5 mt-4 has-text-grey" style="max-width: 800px; margin-left: auto; margin-right: auto;">
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+    <div class="container is-max-desktop">
+  <div class="tabs is-centered is-toggle is-toggle-rounded">
+    <ul id="domain-tabs">
+      <li class="is-active" onclick="switchDomain('MathVerse', this)"><a>MathVerse</a></li>
+      <li onclick="switchDomain('PhyX', this)"><a>PhyX</a></li>
+      <li onclick="switchDomain('Synthetic', this)"><a>Synthetic</a></li>
+      <li onclick="switchDomain('Analytic', this)"><a>Analytic</a></li>
+    </ul>
   </div>
+  <div id="benchmark-table"></div>
+</div>
+
 </section>
 
 
-    <section class="section">
-  <div class="container is-max-desktop">
-    <div class="tabs is-centered is-toggle is-toggle-rounded">
-      <ul>
-        <li class="is-active" onclick="switchDomain('MathVerse', this)"><a>MathVerse</a></li>
-        <li onclick="switchDomain('PhyX', this)"><a>PhyX</a></li>
-        <li onclick="switchDomain('Synthetic', this)"><a>Synthetic</a></li>
-        <li onclick="switchDomain('Analytic', this)"><a>Analytic</a></li>
-      </ul>
-    </div>
-    <div id="benchmark-table"></div>
-  </div>
-</section>
 
-<section class="section" style="padding: 3rem 0;"> <div class="container is-fluid" style="padding: 0 10px;">
-    <h2 class="title is-3 has-text-centered">Experimental Evaluation</h2>
-
-    <div class="table-container" style="overflow: visible; display: flex; justify-content: center;">
-        <img src="./static/images/table.png"
-             style="width: 100%;
-                    max-width: 1400px; /* 强制设定一个很大的上限 */
-                    height: auto;
-                    transform: scale(1.02); /* 微微放大，消除边框局促感 */
-                    mix-blend-mode: multiply;
-                    filter: contrast(1.1) brightness(1.02);">
-    </div>
-  </div>
-</section>
-
-
-
-<section class="section" id="BibTeX">
-  <div class="container is-max-desktop content">
-    <h2 class="title">BibTeX</h2>
-    <pre><code>@article{xiong2026mmformalizer,
+      <section class="section" id="BibTeX">
+        <div class="container is-max-desktop content">
+          <h2 class="title">BibTeX</h2>
+          <pre><code>@article{xiong2026mmformalizer,
   title={MMFormalizer: Multimodal Autoformalization in the Wild},
   author={Xiong, Jing and Han, Qi and Hsieh, Yunta and Shen, Hui and Xin, Huajian and Tao, Chaofan and Zhao, Chenyang and Zhang, Hengyuan and Wu, Taiqiang and Zhang, Zhen and others},
   journal={arXiv preprint},
   year={2026}
 }</code></pre>
-  </div>
-</section>
-
-
-<footer class="footer">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-          <p class="has-text-centered is-size-7">
-            This website template is adapted from <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> and <a href="https://phyx-bench.github.io/">PhyX</a>.
-          </p>
         </div>
-      </div>
-    </div>
-  </div>
-</footer>
+      </section>
+
+
+      <footer class="footer">
+        <div class="container">
+          <div class="columns is-centered">
+            <div class="column is-8">
+              <div class="content">
+                <p class="has-text-centered is-size-7">
+                  This website template is adapted from <a
+                    href="https://github.com/nerfies/nerfies.github.io">Nerfies</a> and <a
+                    href="https://phyx-bench.github.io/">PhyX</a>.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+
 <script type="text/javascript" src="./static/js/maintable.js"></script>
 </body>
 </html>
