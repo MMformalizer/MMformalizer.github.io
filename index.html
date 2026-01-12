@@ -23,6 +23,21 @@
     .tabulator-col { background-color: #fcfcfc !important; }
     .tabulator-cell { border-right: 1px solid #f0f0f0 !important; text-align: center; }
     .tabs { margin-bottom: 20px !important; }
+    .is-hidden {
+    display: none !important;
+  }
+
+  /* 2. 关键：确保当 is-hidden 被移除时，容器能够正确撑开 */
+  .case-carousel-group:not(.is-hidden) {
+    display: block !important;
+    visibility: visible !important;
+    height: auto !important;
+  }
+
+  /* 3. 针对 Bulma Carousel 的布局修正 */
+  .carousel.results-carousel {
+    min-height: 300px; /* 给一个最小高度防止塌陷 */
+  }
   </style>
   <link href="https://unpkg.com/tabulator-tables@5.5.0/dist/css/tabulator_bulma.min.css" rel="stylesheet">
   <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.5.0/dist/js/tabulator.min.js"></script>
@@ -260,19 +275,49 @@
 
     <section class="section">
   <div class="container is-max-desktop">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Recursive Grounding Dynamics</h2>
-        <div class="publication-video">
-          <img src="./static/images/decompose.gif" alt="MMFormalizer Process">
-        </div>
-        <div class="content has-text-justified">
-          <p>
-            ······
-          </p>
-        </div>
+    <h2 class="title is-3 has-text-centered">Recursive Grounding Dynamics</h2>
+
+    <div class="tabs is-centered is-toggle is-toggle-rounded">
+      <ul id="case-study-tabs">
+        <li class="is-active" data-topic="newton"><a>Newton's Laws</a></li>
+        <li data-topic="thermo"><a>Thermodynamics</a></li>
+        <li data-topic="maxwell"><a>Maxwell's Equations</a></li>
+      </ul>
+    </div>
+
+    <div id="newton-carousel" class="carousel results-carousel case-carousel-group">
+      <div class="item has-text-centered">
+        <img src="./static/images/newton1.gif" alt="Newton 1">
+      </div>
+      <div class="item has-text-centered">
+        <img src="./static/images/newton2.gif" alt="Newton 2">
+      </div>
+      <div class="item has-text-centered">
+        <img src="./static/images/newton3.gif" alt="Newton 3">
       </div>
     </div>
+
+    <div id="thermo-carousel" class="carousel results-carousel case-carousel-group is-hidden">
+      <div class="item has-text-centered">
+        <img src="./static/images/re0.gif" alt="Thermo 0">
+      </div>
+      <div class="item has-text-centered">
+        <img src="./static/images/re1.gif" alt="Thermo 1">
+      </div>
+      <div class="item has-text-centered">
+        <img src="./static/images/re2.gif" alt="Thermo 2">
+      </div>
+      <div class="item has-text-centered">
+        <img src="./static/images/re3.gif" alt="Thermo 3">
+      </div>
+    </div>
+
+    <div id="maxwell-carousel" class="carousel results-carousel case-carousel-group is-hidden">
+      <div class="item has-text-centered">
+    <img src="./static/images/electro.gif" alt="Maxwell 1">
+  </div>
+    </div>
+
   </div>
 </section>
 
