@@ -59,7 +59,8 @@ function updateTableStructure(domain) {
             {title: "Modern", field: "px_mo", formatter: colorFormatter},
             {title: "Mechanics", field: "px_me", formatter: colorFormatter},
             {title: "Electromagnetism", field: "px_el", formatter: colorFormatter},
-            {title: "Thermodynamics", field: "px_th", formatter: colorFormatter}
+            {title: "Thermodynamics", field: "px_th", formatter: colorFormatter},
+            {title: "Thermo pass@3", field: "px_k", formatter: colorFormatter}
         ];
     } else if (domain === 'Synthetic') {
         dynamicCols = [
@@ -81,29 +82,29 @@ document.addEventListener('DOMContentLoaded', function() {
     // 核心数据集 (从 LaTeX 完整录入 - 仅 Img 模式)
     var tableData = [
         // --- GPT-5 ---
-        { model: "GPT-5", metric: "Compile", mv_p: 24.0, mv_s: 28.0, mv_f: 80.0, px_mo: 71.4, px_me: 71.4, px_el: 66.7, px_th: 0.0, sy_p: 40.0, sy_s: 10.0, an_p: 40.0, an_s: 20.0 },
-        { model: "GPT-5", metric: "Semantics", mv_p: 20.0, mv_s: 28.0, mv_f: 30.0, px_mo: 71.4, px_me: 71.4, px_el: 50.0, px_th: 0.0, sy_p: 40.0, sy_s: 0.0, an_p: 20.0, an_s: 20.0 },
-        { model: "GPT-5", metric: "Human Check", mv_p: 12.0, mv_s: 28.0, mv_f: 30.0, px_mo: 42.9, px_me: 71.4, px_el: 50.0, px_th: 0.0, sy_p: 20.0, sy_s: 10.0, an_p: 20.0, an_s: 0.0 },
+        { model: "GPT-5", metric: "Compile", mv_p: 24.0, mv_s: 28.0, mv_f: 80.0, px_mo: 71.4, px_me: 71.4, px_el: 66.7, px_th: 0.0, px_k: 0.0, sy_p: 40.0, sy_s: 10.0, an_p: 40.0, an_s: 20.0 },
+        { model: "GPT-5", metric: "Semantics", mv_p: 20.0, mv_s: 28.0, mv_f: 30.0, px_mo: 71.4, px_me: 71.4, px_el: 50.0, px_th: 0.0, px_k: 0.0, sy_p: 40.0, sy_s: 0.0, an_p: 20.0, an_s: 20.0 },
+        { model: "GPT-5", metric: "Human Check", mv_p: 12.0, mv_s: 28.0, mv_f: 30.0, px_mo: 42.9, px_me: 71.4, px_el: 50.0, px_th: 0.0, px_k: 0.0, sy_p: 20.0, sy_s: 10.0, an_p: 20.0, an_s: 0.0 },
 
         // --- Gemini-3-Pro ---
-        { model: "Gemini-3-Pro", metric: "Compile", mv_p: 76.0, mv_s: 52.0, mv_f: 100.0, px_mo: 14.3, px_me: 28.6, px_el: 16.7, px_th: 0.0, sy_p: 70.0, sy_s: 80.0, an_p: 60.0, an_s: 60.0 },
-        { model: "Gemini-3-Pro", metric: "Semantics", mv_p: 76.0, mv_s: 52.0, mv_f: 40.0, px_mo: 14.3, px_me: 28.6, px_el: 33.3, px_th: 0.0, sy_p: 70.0, sy_s: 80.0, an_p: 60.0, an_s: 40.0 },
-        { model: "Gemini-3-Pro", metric: "Human Check", mv_p: 72.0, mv_s: 52.0, mv_f: 40.0, px_mo: 14.3, px_me: 28.6, px_el: 33.3, px_th: 0.0, sy_p: 40.0, sy_s: 50.0, an_p: 60.0, an_s: 40.0 },
+        { model: "Gemini-3-Pro", metric: "Compile", mv_p: 76.0, mv_s: 52.0, mv_f: 100.0, px_mo: 14.3, px_me: 28.6, px_el: 16.7, px_th: 0.0, px_k: 0.0, sy_p: 70.0, sy_s: 80.0, an_p: 60.0, an_s: 60.0 },
+        { model: "Gemini-3-Pro", metric: "Semantics", mv_p: 76.0, mv_s: 52.0, mv_f: 40.0, px_mo: 14.3, px_me: 28.6, px_el: 33.3, px_th: 0.0, px_k: 0.0, sy_p: 70.0, sy_s: 80.0, an_p: 60.0, an_s: 40.0 },
+        { model: "Gemini-3-Pro", metric: "Human Check", mv_p: 72.0, mv_s: 52.0, mv_f: 40.0, px_mo: 14.3, px_me: 28.6, px_el: 33.3, px_th: 0.0, px_k: 0.0, sy_p: 40.0, sy_s: 50.0, an_p: 60.0, an_s: 40.0 },
 
         // --- Gemini-2.5-Pro ---
-        { model: "Gemini-2.5-Pro", metric: "Compile", mv_p: 24.0, mv_s: 32.0, mv_f: 60.0, px_mo: 14.3, px_me: 0.0, px_el: 0.0, px_th: 0.0, sy_p: 30.0, sy_s: 30.0, an_p: 20.0, an_s: 60.0 },
-        { model: "Gemini-2.5-Pro", metric: "Semantics", mv_p: 20.0, mv_s: 24.0, mv_f: 60.0, px_mo: 14.3, px_me: 0.0, px_el: 0.0, px_th: 0.0, sy_p: 30.0, sy_s: 10.0, an_p: 20.0, an_s: 40.0 },
-        { model: "Gemini-2.5-Pro", metric: "Human Check", mv_p: 20.0, mv_s: 24.0, mv_f: 60.0, px_mo: 0.0, px_me: 0.0, px_el: 0.0, px_th: 0.0, sy_p: 20.0, sy_s: 10.0, an_p: 20.0, an_s: 60.0 },
+        { model: "Gemini-2.5-Pro", metric: "Compile", mv_p: 24.0, mv_s: 32.0, mv_f: 60.0, px_mo: 14.3, px_me: 0.0, px_el: 0.0, px_th: 0.0, px_k: 100.0, sy_p: 30.0, sy_s: 30.0, an_p: 20.0, an_s: 60.0 },
+        { model: "Gemini-2.5-Pro", metric: "Semantics", mv_p: 20.0, mv_s: 24.0, mv_f: 60.0, px_mo: 14.3, px_me: 0.0, px_el: 0.0, px_th: 0.0, px_k: 100.0, sy_p: 30.0, sy_s: 10.0, an_p: 20.0, an_s: 40.0 },
+        { model: "Gemini-2.5-Pro", metric: "Human Check", mv_p: 20.0, mv_s: 24.0, mv_f: 60.0, px_mo: 0.0, px_me: 0.0, px_el: 0.0, px_th: 0.0, px_k: 30.0, sy_p: 20.0, sy_s: 10.0, an_p: 20.0, an_s: 60.0 },
 
         // --- Qwen3-VL-235B ---
-        { model: "Qwen3-VL-235B", metric: "Compile", mv_p: 28.0, mv_s: 20.0, mv_f: 30.0, px_mo: 0.0, px_me: 0.0, px_el: 0.0, px_th: 0.0, sy_p: 0.0, sy_s: 0.0, an_p: 20.0, an_s: 20.0 },
-        { model: "Qwen3-VL-235B", metric: "Semantics", mv_p: 16.0, mv_s: 16.0, mv_f: 20.0, px_mo: 0.0, px_me: 0.0, px_el: 0.0, px_th: 0.0, sy_p: 0.0, sy_s: 0.0, an_p: 20.0, an_s: 20.0 },
-        { model: "Qwen3-VL-235B", metric: "Human Check", mv_p: 12.0, mv_s: 12.0, mv_f: 10.0, px_mo: 0.0, px_me: 0.0, px_el: 0.0, px_th: 0.0, sy_p: 0.0, sy_s: 0.0, an_p: 0.0, an_s: 20.0 },
+        { model: "Qwen3-VL-235B", metric: "Compile", mv_p: 28.0, mv_s: 20.0, mv_f: 30.0, px_mo: 0.0, px_me: 0.0, px_el: 0.0, px_th: 0.0, px_k: 0.0, sy_p: 0.0, sy_s: 0.0, an_p: 20.0, an_s: 20.0 },
+        { model: "Qwen3-VL-235B", metric: "Semantics", mv_p: 16.0, mv_s: 16.0, mv_f: 20.0, px_mo: 0.0, px_me: 0.0, px_el: 0.0, px_th: 0.0, px_k: 0.0, sy_p: 0.0, sy_s: 0.0, an_p: 20.0, an_s: 20.0 },
+        { model: "Qwen3-VL-235B", metric: "Human Check", mv_p: 12.0, mv_s: 12.0, mv_f: 10.0, px_mo: 0.0, px_me: 0.0, px_el: 0.0, px_th: 0.0, px_k: 0.0, sy_p: 0.0, sy_s: 0.0, an_p: 0.0, an_s: 20.0 },
 
         // --- Qwen2.5-VL-72B ---
-        { model: "Qwen2.5-VL-72B", metric: "Compile", mv_p: 0.0, mv_s: 12.0, mv_f: 20.0, px_mo: 0.0, px_me: 0.0, px_el: 0.0, px_th: 0.0, sy_p: 10.0, sy_s: 0.0, an_p: 0.0, an_s: 0.0 },
-        { model: "Qwen2.5-VL-72B", metric: "Semantics", mv_p: 0.0, mv_s: 8.0, mv_f: 0.0, px_mo: 0.0, px_me: 0.0, px_el: 0.0, px_th: 0.0, sy_p: 0.0, sy_s: 0.0, an_p: 0.0, an_s: 0.0 },
-        { model: "Qwen2.5-VL-72B", metric: "Human Check", mv_p: 0.0, mv_s: 4.0, mv_f: 0.0, px_mo: 0.0, px_me: 0.0, px_el: 0.0, px_th: 0.0, sy_p: 0.0, sy_s: 0.0, an_p: 0.0, an_s: 0.0 }
+        { model: "Qwen2.5-VL-72B", metric: "Compile", mv_p: 0.0, mv_s: 12.0, mv_f: 20.0, px_mo: 0.0, px_me: 0.0, px_el: 0.0, px_th: 0.0, px_k: 0.0, sy_p: 10.0, sy_s: 0.0, an_p: 0.0, an_s: 0.0 },
+        { model: "Qwen2.5-VL-72B", metric: "Semantics", mv_p: 0.0, mv_s: 8.0, mv_f: 0.0, px_mo: 0.0, px_me: 0.0, px_el: 0.0, px_th: 0.0, px_k: 0.0, sy_p: 0.0, sy_s: 0.0, an_p: 0.0, an_s: 0.0 },
+        { model: "Qwen2.5-VL-72B", metric: "Human Check", mv_p: 0.0, mv_s: 4.0, mv_f: 0.0, px_mo: 0.0, px_me: 0.0, px_el: 0.0, px_th: 0.0, px_k: 0.0, sy_p: 0.0, sy_s: 0.0, an_p: 0.0, an_s: 0.0 }
     ];
 
     // 初始化 Tabulator 实例
