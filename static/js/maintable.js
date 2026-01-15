@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // --- Qwen2.5-VL-72B ---
         { model: "Qwen2.5-VL-72B", metric: "Compile", mv_p: 0.0, mv_s: 12.0, mv_f: 20.0, px_mo: 0.0, px_me: 0.0, px_el: 0.0, px_th: 0.0, px_k: 0.0, sy_p: 10.0, sy_s: 0.0, an_p: 0.0, an_s: 0.0 },
         { model: "Qwen2.5-VL-72B", metric: "Semantics", mv_p: 0.0, mv_s: 8.0, mv_f: 0.0, px_mo: 0.0, px_me: 0.0, px_el: 0.0, px_th: 0.0, px_k: 0.0, sy_p: 0.0, sy_s: 0.0, an_p: 0.0, an_s: 0.0 },
-        { model: "Qwen2.5-VL-72B", metric: "Human Check", mv_p: 0.0, mv_s: 4.0, mv_f: 0.0, px_mo: 0.0, px_me: 0.0, px_el: 0.0, px_th: 0.0, px_k: 0.0, sy_p: 0.0, sy_s: 0.0, an_p: 0.0, an_s: 0.0 }
+        { model: "Qwen2.5-VL-72B", metric: "Human Check", mv_p: 0.0, mv_s: 4.0, mv_f: 0.0, px_mo: 0.0, px_me: 0.0, px_el: 0.0, px_th: 0.0, px_k: 0.0, sy_p: 0.0, sy_s: 0.0, an_p: 0.0, an_s: 0.0 },
 
         { model: "GPT-4o", metric: "Compile", mv_p: 24.0, mv_s: 12.0, mv_f: 40.0, px_mo: 0.0, px_me: 0.0, px_el: 0.0, px_th: 0.0, px_k: 0.0, sy_p: 10.0, sy_s: 0.0, an_p: 0.0, an_s: 0.0 },
         { model: "GPT-4o", metric: "Semantics", mv_p: 0.0, mv_s: 8.0, mv_f: 0.0, px_mo: 0.0, px_me: 0.0, px_el: 0.0, px_th: 0.0, px_k: 0.0, sy_p: 0.0, sy_s: 0.0, an_p: 0.0, an_s: 0.0 },
